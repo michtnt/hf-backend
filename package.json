@@ -1,0 +1,30 @@
+{
+  "name": "hf-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "dev": "NODE_ENV=DEV npm start",
+    "test": "mocha --recursive tests/*.test.js --timeout 5000 --exit"
+  },
+  "author": "Michelle Tanoto",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.2",
+    "nodemon": "^2.0.13",
+    "supertest": "^6.1.6"
+  },
+  "dependencies": {
+    "axios": "^0.21.4",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.7",
+    "morgan": "^1.10.0"
+  }
+}
