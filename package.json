@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js",
-    "dev": "NODE_ENV=DEV npm start",
+    "start": "node src/index.js",
+    "dev": "NODE_ENV=DEV nodemon src/index.js",
     "test": "mocha --recursive tests/*.test.js --timeout 5000 --exit"
   },
   "author": "Michelle Tanoto",
