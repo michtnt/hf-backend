@@ -63,7 +63,7 @@ route.post("/login", async (req, res) => {
 
       return res.status(200).json({ user: sanitisedUser, token });
     }
-    return res.status(500).send("Invalid credentials.");
+    return res.status(500).send({ message: "Invalid credentials." });
   } catch (e) {
     throw new Error("Login failed.");
   }

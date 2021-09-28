@@ -28,12 +28,18 @@ mongoose
   });
 
 // middlewares
+mongoose.set("debug", true);
+
 app.use(logger("dev")); // log request
 app.use(cors());
 app.use(express.json()); // parse to JSON
 
 // routes
 // un-protected
+app.get("/", (req, res) => {
+  res.status(200).send("Server is working.");
+});
+
 app.use("/auth", authRoutes);
 
 // protected

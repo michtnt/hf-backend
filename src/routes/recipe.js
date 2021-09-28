@@ -32,6 +32,8 @@ route.post("/", async (req, res) => {
       name: obj.name,
       rating: obj.rating,
       menu: obj.menuId,
+      prep_time_minutes: obj.prep_time_minutes,
+      cook_time_minutes: obj.cook_time_minutes,
     });
 
     const newRecipe = await recipe.save();
