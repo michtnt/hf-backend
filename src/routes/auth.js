@@ -65,6 +65,7 @@ route.post("/login", async (req, res) => {
     }
     return res.status(500).send({ message: "Invalid credentials." });
   } catch (e) {
+    console.log(e);
     throw new Error("Login failed.");
   }
 });
