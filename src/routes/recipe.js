@@ -51,7 +51,6 @@ route.post("/", async (req, res) => {
 
     return res.status(200).json({ recipe: newRecipe });
   } catch (e) {
-    console.log(e);
     throw new Error("Recipe is not created.");
   }
 });
