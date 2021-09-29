@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "NODE_ENV=DEV nodemon src/index.js",
+    "dev": "NODE_ENV=DEVELOPMENT nodemon src/index.js",
+    "script": "node scripts/recipe.js && node scripts/menu.js",
     "test": "mocha --recursive tests/*.test.js --timeout 5000 --exit"
   },
   "author": "Michelle Tanoto",

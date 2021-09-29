@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const Recipe = new Schema({
-  name: String,
+  name: { type: String, required: true },
   instructions: [
     {
       start_time: Number,
@@ -10,10 +10,10 @@ const Recipe = new Schema({
       display_text: String,
     },
   ],
-  menu: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "menus",
-  },
+  // menu: { // each week different set of recipes are selected
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "menus",
+  // },
   thumbnail_url: String,
   prep_time_minutes: String,
   cook_time_minutes: String,

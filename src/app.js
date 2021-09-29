@@ -29,7 +29,7 @@ mongoose
   });
 
 // middlewares
-mongoose.set("debug", true);
+config.isDev && mongoose.set("debug", true);
 
 app.use(logger("dev")); // log request
 app.use(cors());

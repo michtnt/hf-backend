@@ -1,5 +1,6 @@
 const Menu = require("../models/menu");
 const Recipe = require("../models/recipe");
+const Review = require("../models/review");
 const route = require("express").Router();
 
 // [GET] all recipes
@@ -78,6 +79,31 @@ route.delete("/:id", async (req, res) => {
     return res.status(204).end();
   } catch (e) {
     throw new Error("Recipe failed to be deleted.");
+  }
+});
+
+// [CREATE] review
+route.post("/review/:id", async (req, res) => {
+  const { rating, message } = req.body;
+
+  const review = new Review({
+    rating,
+    message,
+    user: req.user,
+  });
+
+  const newReview = await review.save();
+
+  // recipe reference tor reviews
+  await Recipe.findOneAndUpdate(
+    { _id: req.params.id },
+    { $push: { reviews: newReview } }
+  );
+
+  if (newReview) {
+    return res.status(200).json({ newReview });
+  } else {
+    throw new Error("Review is not created.");
   }
 });
 

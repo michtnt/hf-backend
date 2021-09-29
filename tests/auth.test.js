@@ -4,17 +4,9 @@ const expect = require("chai").expect;
 const config = require("../src/config");
 const { removeUser } = require("../tests/services/userService");
 
+// TODO
 describe("Authentication", () => {
-  // TODO start server before test
-  // before((done) => {
-  //   app.listen(config.PORT, () => {
-  //     console.log(`Server running on port ${config.PORT}`);
-  //     done();
-  //   });
-  // });
-
   let userId;
-  // TODO: slow, need improvement
   describe("sign up", () => {
     it("should sign up successfully with email and password", async () => {
       let resp = await axios.post(
@@ -50,7 +42,6 @@ describe("Authentication", () => {
   });
 
   describe("login", () => {
-    // TODO: login is slow too
     it("should login if email and password match database", async () => {
       let resp = await axios.post(
         "http://localhost:3001/auth/login",
