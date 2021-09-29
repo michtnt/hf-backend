@@ -35,8 +35,7 @@ route.post("/", async (req, res) => {
 
     const recipe = new Recipe({
       name: obj.name,
-      rating: obj.rating,
-      menu: obj.menuId,
+      description: obj.description,
       prep_time_minutes: obj.prep_time_minutes,
       cook_time_minutes: obj.cook_time_minutes,
     });
