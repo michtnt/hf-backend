@@ -4,10 +4,15 @@ const route = require("express").Router();
 
 // [GET] all recipes
 route.get("/", async (req, res) => {
-  const recipes = await Recipe.find({}).populate("menu", {
-    _id: true,
-    name: true,
-  });
+  const recipes = await Recipe.find({})
+    .populate({
+      path: "reviews",
+      populate: {
+        path: "user",
+        model: "users",
+      },
+    })
+    .exec();
   if (!recipes) {
     return res.status(404).json({ message: "No recipes available." });
   }

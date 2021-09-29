@@ -10,6 +10,7 @@ const { verifyToken } = require("./middlewares");
 const recipeRoutes = require("./routes/recipe");
 const menuRoutes = require("./routes/menu");
 const authRoutes = require("./routes/auth");
+const reviewRoutes = require("./routes/review");
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.use("/auth", authRoutes);
 app.all("/v1/*", [verifyToken]);
 app.use("/v1/recipe", recipeRoutes);
 app.use("/v1/menu", menuRoutes);
+app.use("/v1/review", reviewRoutes);
 
 // error middleware
 app.use((err, req, res, next) => {

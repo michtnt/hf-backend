@@ -14,11 +14,14 @@ const Recipe = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "menus",
   },
-  rating: Number,
   thumbnail_url: String,
   prep_time_minutes: String,
   cook_time_minutes: String,
   description: String,
+  reviews: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "reviews" }],
+    default: [],
+  },
 });
 
 module.exports = mongoose.model("recipes", Recipe);
