@@ -9,7 +9,13 @@ route.get("/", async (req, res) => {
       _id: true,
       name: true,
     })
-    .populate("reviews");
+    .populate({
+      path: "reviews",
+      populate: {
+        path: "user",
+        model: "users",
+      },
+    });
 
   if (!menus) {
     return res.status(404).json({ message: "No menu available." });
@@ -78,23 +84,36 @@ route.delete("/:id", async (req, res) => {
 // [CREATE] review
 route.post("/review/:id", async (req, res) => {
   const { rating, message } = req.body;
-
-  const review = new Review({
+  let returnedReview;
+  let code = `${req.params.id}_${req.user._id}`;
+  const obj = {
     rating,
     message,
-    user: req.user,
-  });
+  };
 
-  const newReview = await review.save();
+  // https://docs.mongodb.com/realm/mongodb/actions/collection.findOneAndUpdate/
+  let review = await Review.findOneAndUpdate({ code }, { $set: obj });
 
-  // recipe reference tor reviews
-  await Menu.findOneAndUpdate(
-    { _id: req.params.id },
-    { $push: { reviews: newReview } }
-  );
+  if (review) {
+    returnedReview = review;
+  } else {
+    const review = new Review({
+      ...obj,
+      user: req.user,
+      code,
+    });
 
-  if (newReview) {
-    return res.status(200).json({ newReview });
+    returnedReview = await review.save();
+
+    // recipe reference tor reviews
+    await Menu.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { reviews: returnedReview } }
+    );
+  }
+
+  if (returnedReview) {
+    return res.status(200).json({ returnedReview });
   } else {
     throw new Error("Review is not created.");
   }

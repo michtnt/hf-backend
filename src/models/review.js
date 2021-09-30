@@ -8,6 +8,7 @@ const Review = new Schema({
   },
   rating: Number,
   message: String,
+  code: String, // prevent 2 ratings in one entity, reoresented as id_userid
 });
 
 module.exports = mongoose.model("reviews", Review);
